@@ -6,17 +6,48 @@ import {
   Patch,
   Param,
   Delete,
+  Req
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { CreateMoviesDto } from './dto/create-movies.dto';
 
-@Controller('mandates')
-export class MoviesController {
-  constructor(private readonly mandateService: MoviesService) {}
+@Controller('movies')
 
-  @Post()
+export class MoviesController {
+  constructor(private readonly MoviesService: MoviesService) {}
+
+  @Post('add_to_list')
   create(@Body() body: CreateMoviesDto) {
-    return this.mandateService.create(body);
+    try {
+      return this.MoviesService.create(body);
+    }catch (err){
+      console.log("gotcha", err);
+    }
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
