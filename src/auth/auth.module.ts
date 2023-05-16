@@ -8,9 +8,7 @@ import { user_movie_list } from './entities/user_movie_list.entity';
 import { HttpModule } from '@nestjs/axios';
 
 @Module({
-    imports: [
-      SequelizeModule.forFeature([User, user_movie_list]), HttpModule,
-    ],
+    imports: [SequelizeModule.forFeature([User, user_movie_list]), HttpModule],
     controllers: [AuthController],
     providers: [AuthService],
     exports: [AuthService],

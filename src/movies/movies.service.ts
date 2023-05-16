@@ -4,24 +4,28 @@ import { CreateMoviesDto } from './dto/create-movies.dto';
 import { RemoveMoviesDto } from './dto/remove-movies.dto';
 import { User } from './entities/user.entity';
 import { user_movie_list } from './entities/user_movie_list.entity';
-import { RankMovieDto } from "./dto/rank-movie.dto";
+import { RankMovieDto } from './dto/rank-movie.dto';
 
 @Injectable()
 export class MoviesService {
     async add_to_list(createMoviesDto: CreateMoviesDto) {
         try {
-            const response: {data: object; message: string; error: boolean, http_status: number } =
-                {
-                    error: false,
-                    message: '',
-                    data: {},
-                    http_status: 201,
-                };
+            const response: {
+                data: object;
+                message: string;
+                error: boolean;
+                http_status: number;
+            } = {
+                error: false,
+                message: '',
+                data: {},
+                http_status: 201,
+            };
 
             const user_list = await user_movie_list.findOne({
                 where: {
                     movie_id: createMoviesDto.movie_id,
-                    user_id: createMoviesDto.user_id
+                    user_id: createMoviesDto.user_id,
                 },
             });
 
@@ -49,18 +53,22 @@ export class MoviesService {
 
     async remove_from_list(removeMoviesDto: RemoveMoviesDto) {
         try {
-            const response: {data: object; message: string; error: boolean, http_status: number } =
-                {
-                    error: false,
-                    message: '',
-                    data: {},
-                    http_status: 204,
-                };
+            const response: {
+                data: object;
+                message: string;
+                error: boolean;
+                http_status: number;
+            } = {
+                error: false,
+                message: '',
+                data: {},
+                http_status: 204,
+            };
 
             const user_list = await user_movie_list.findOne({
                 where: {
                     movie_id: removeMoviesDto.movie_id,
-                    user_id: removeMoviesDto.user_id
+                    user_id: removeMoviesDto.user_id,
                 },
             });
 
@@ -72,10 +80,10 @@ export class MoviesService {
             }
 
             await user_movie_list.destroy({
-                where:{
+                where: {
                     movie_id: removeMoviesDto.movie_id,
-                    user_id: removeMoviesDto.user_id
-                }
+                    user_id: removeMoviesDto.user_id,
+                },
             });
 
             response.message = 'movie removed from list successfully';
@@ -87,17 +95,21 @@ export class MoviesService {
 
     async get_movie_list(user_id: number) {
         try {
-            const response: {data: object; message: string; error: boolean, http_status: number } =
-                {
-                    error: false,
-                    message: '',
-                    data: {},
-                    http_status: 200,
-                };
+            const response: {
+                data: object;
+                message: string;
+                error: boolean;
+                http_status: number;
+            } = {
+                error: false,
+                message: '',
+                data: {},
+                http_status: 200,
+            };
 
             const user_list = await user_movie_list.findAll({
                 where: {
-                    user_id
+                    user_id,
                 },
             });
 
@@ -107,7 +119,6 @@ export class MoviesService {
                 response.message = 'your movie List is currently empty';
                 return response;
             }
-
 
             response.message = 'music list retrieved successfully';
             response.data = user_list;
@@ -119,18 +130,22 @@ export class MoviesService {
 
     async rank_movie(rankMovieDto: RankMovieDto, user_id: number) {
         try {
-            const response: {data: object; message: string; error: boolean, http_status: number } =
-              {
-                  error: false,
-                  message: '',
-                  data: {},
-                  http_status: 200,
-              };
+            const response: {
+                data: object;
+                message: string;
+                error: boolean;
+                http_status: number;
+            } = {
+                error: false,
+                message: '',
+                data: {},
+                http_status: 200,
+            };
 
             const user_list = await user_movie_list.findOne({
                 where: {
                     movie_id: rankMovieDto.movie_id,
-                    user_id
+                    user_id,
                 },
             });
 
@@ -141,14 +156,17 @@ export class MoviesService {
                 return response;
             }
 
-            const updated_movie_rating = await user_movie_list.update({
-                rating: rankMovieDto.rating,
-            }, {
-                where: {
-                    movie_id: rankMovieDto.movie_id,
-                    user_id
-                }
-            });
+            await user_movie_list.update(
+                {
+                    rating: rankMovieDto.rating,
+                },
+                {
+                    where: {
+                        movie_id: rankMovieDto.movie_id,
+                        user_id,
+                    },
+                },
+            );
 
             response.message = 'movie rated successfully';
             return response;
@@ -156,5 +174,4 @@ export class MoviesService {
             console.log('error ranking movie', e);
         }
     }
-
 }
