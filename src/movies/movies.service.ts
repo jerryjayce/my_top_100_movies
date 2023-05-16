@@ -62,7 +62,7 @@ export class MoviesService {
                 error: false,
                 message: '',
                 data: {},
-                http_status: 204,
+                http_status: 200,
             };
 
             const user_list = await user_movie_list.findOne({
