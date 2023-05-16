@@ -1,12 +1,9 @@
 import {
-  IsNotEmpty, IsNumberString, Length,
+  IsNotEmpty, IsNumberString,
   IsOptional, IsNumber, Min, Max
 } from "class-validator";
 
-export class CreateMoviesDto {
-  @IsNotEmpty()
-  @Length(2, 50)
-  title: string;
+export class RankMovieDto {
 
   @IsNotEmpty()
   @IsNumberString()
