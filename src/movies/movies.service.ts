@@ -128,7 +128,7 @@ export class MoviesService {
         }
     }
 
-    async rank_movie(rankMovieDto: RankMovieDto, user_id: number) {
+    async rank_movie(rankMovieDto: RankMovieDto) {
         try {
             const response: {
                 data: object;
@@ -145,7 +145,7 @@ export class MoviesService {
             const user_list = await user_movie_list.findOne({
                 where: {
                     movie_id: rankMovieDto.movie_id,
-                    user_id,
+                    user_id: rankMovieDto.user_id,
                 },
             });
 
@@ -163,7 +163,7 @@ export class MoviesService {
                 {
                     where: {
                         movie_id: rankMovieDto.movie_id,
-                        user_id,
+                        user_id: rankMovieDto.user_id,
                     },
                 },
             );

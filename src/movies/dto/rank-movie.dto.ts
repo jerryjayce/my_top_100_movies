@@ -21,5 +21,5 @@ export class RankMovieDto {
     @IsNumber()
     @Min(1)
     @Max(10)
-    rating: number;
+    rating: string;
 }

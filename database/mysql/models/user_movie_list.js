@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     movie_id: DataTypes.INTEGER,
     user_id: DataTypes.INTEGER,
-    rating: DataTypes.INTEGER
+    rating: DataTypes.DOUBLE
   }, {
     sequelize,
     modelName: 'user_movie_list',

@@ -12,5 +12,5 @@ export class user_movie_list extends Model {
     user_id: number;
 
     @Column({ defaultValue: 0 })
-    rating?: number;
+    rating?: string;
 }

@@ -106,8 +106,7 @@ export class MoviesController {
     ) {
         try {
             body.user_id = req?.user?.user_id;
-            const user_id = 23;
-            const data = await this.MoviesService.rank_movie(body, user_id);
+            const data = await this.MoviesService.rank_movie(body);
             response.status(data?.http_status || 200).send(data);
         } catch (err) {
             console.log('error', err);
