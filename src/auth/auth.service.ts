@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { Injectable } from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
-import { User } from './entities/user.entity';
+import { user } from './entities/user.entity';
 import * as process from 'process';
 
 @Injectable()
@@ -22,17 +22,21 @@ export class AuthService {
                 http_status: 200,
             };
 
-            const user: any = await User.findOne({
+            const user_details: any = await user.findOne({
                 raw: true,
                 where: {
                     email: loginDto.user_name,
                 },
             });
 
-            const saltOrRounds = 10;
+            // const saltOrRounds = 10;
             const password = loginDto.password;
-            const hash = await bcrypt.hash(password, saltOrRounds);
-            const is_match = await bcrypt.compare(password, user?.password);
+            // const hash = await bcrypt.hash(password, saltOrRounds);
+            console.log(user_details?.password);
+            const is_match = await bcrypt.compare(
+                password,
+                user_details?.password,
+            );
 
             if (!is_match || !user) {
                 response.error = true;
@@ -41,7 +45,10 @@ export class AuthService {
                 return response;
             }
 
-            const payload = { email: user.email, user_id: user.id };
+            const payload = {
+                email: user_details.email,
+                user_id: user_details.id,
+            };
 
             console.log(process.env.JWT_SECRET);
 

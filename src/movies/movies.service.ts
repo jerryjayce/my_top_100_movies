@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
 import { CreateMoviesDto } from './dto/create-movies.dto';
 import { RemoveMoviesDto } from './dto/remove-movies.dto';
-import { User } from './entities/user.entity';
 import { user_movie_list } from './entities/user_movie_list.entity';
 import { RankMovieDto } from './dto/rank-movie.dto';
 

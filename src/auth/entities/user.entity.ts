@@ -1,15 +1,7 @@
-import {
-    Column,
-    Model,
-    Table,
-    HasMany,
-    HasOne,
-    BelongsToMany,
-} from 'sequelize-typescript';
-import { user_movie_list } from './user_movie_list.entity';
+import { Column, Model, Table } from 'sequelize-typescript';
 
 @Table
-export class User extends Model {
+export class user extends Model {
     @Column
     first_name: string;
 
@@ -21,7 +13,4 @@ export class User extends Model {
 
     @Column
     password: string;
-
-    @HasMany(() => user_movie_list, 'user_id')
-    User_movie_list: user_movie_list[];
 }
