@@ -31,8 +31,6 @@ export class AuthService {
 
             // const saltOrRounds = 10;
             const password = loginDto.password;
-            // const hash = await bcrypt.hash(password, saltOrRounds);
-            console.log(user_details?.password);
             const is_match = await bcrypt.compare(
                 password,
                 user_details?.password,
