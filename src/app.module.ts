@@ -9,6 +9,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './movies/entities/user.entity';
 import { user_movie_list } from './movies/entities/user_movie_list.entity';
 import { JwtModule } from '@nestjs/jwt';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Module({
     imports: [
@@ -19,11 +21,11 @@ import { JwtModule } from '@nestjs/jwt';
         }),
         SequelizeModule.forRoot({
             dialect: 'mysql',
-            host: 'localhost',
-            port: 3306,
-            username: 'root',
-            password: null,
-            database: 'db_test',
+            host: "t.cd1mel6wxdt7.us-west-2.rds.amazonaws.com",
+            port: parseInt(process.env.DATABASE_PORT),
+            username: process.env.DB_UN,
+            password: process.env.DB_P,
+            database: process.env.DB_UN,
             models: [User, user_movie_list],
             autoLoadModels: true,
             synchronize: true,
