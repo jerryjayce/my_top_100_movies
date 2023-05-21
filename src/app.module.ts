@@ -21,7 +21,7 @@ dotenv.config();
         }),
         SequelizeModule.forRoot({
             dialect: 'mysql',
-            host: "t.cd1mel6wxdt7.us-west-2.rds.amazonaws.com",
+            host: process.env.DATABASE_HOST,
             port: parseInt(process.env.DATABASE_PORT),
             username: process.env.DB_UN,
             password: process.env.DB_P,
